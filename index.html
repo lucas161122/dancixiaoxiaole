@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单词消消乐</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="spark spark-a"></div>
+      <div class="spark spark-b"></div>
+      <div class="spark spark-c"></div>
+
+      <main class="game-card">
+        <header class="hero">
+          <h1 id="game-title" class="game-title" title="点击修改标题">单词消消乐</h1>
+          <div class="title-tip">点击标题即可修改并自动保存</div>
+        </header>
+
+        <section class="toolbar" aria-label="游戏菜单">
+          <label class="menu-item slider-group">
+            <span class="menu-label">单词数量</span>
+            <input id="pair-range" type="range" min="5" max="25" value="10" />
+            <span id="pair-count">10 对</span>
+          </label>
+
+          <div class="menu-item">
+            <button id="import-btn" type="button" class="action-btn">导入词表</button>
+            <input
+              id="file-input"
+              class="sr-only-input"
+              type="file"
+              accept=".xlsx,.xls,.csv,.tsv,.txt"
+            />
+          </div>
+
+          <div class="menu-item">
+            <button id="start-btn" type="button" class="action-btn primary">开始游戏</button>
+          </div>
+
+          <label class="menu-item">
+            <span class="menu-label">朗读设置</span>
+            <select id="speech-mode">
+              <option value="click">单击则发音</option>
+              <option value="match">匹配后发音</option>
+              <option value="off">不发音</option>
+            </select>
+          </label>
+
+          <label class="menu-item">
+            <span class="menu-label">语速</span>
+            <select id="speech-rate">
+              <option value="1">1x</option>
+              <option value="0.5">0.5x</option>
+              <option value="2">2x</option>
+            </select>
+          </label>
+
+          <div class="menu-item">
+            <button id="mistakes-btn" type="button" class="action-btn ghost">常错词汇</button>
+          </div>
+        </section>
+
+        <section class="status-row">
+          <div id="timer-text" class="timer-badge">耗时：0 秒</div>
+          <div id="wordbook-text" class="wordbook-status">尚未导入词表</div>
+        </section>
+
+        <section id="board" class="board is-locked" aria-label="单词面板"></section>
+      </main>
+    </div>
+
+    <div id="result-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-card">
+        <h2>恭喜通关</h2>
+        <p id="result-text">本轮耗时：0 秒</p>
+        <div class="result-actions">
+          <button id="continue-btn" type="button" class="action-btn primary">继续挑战</button>
+          <button id="finish-btn" type="button" class="action-btn">完成</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mistakes-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-card modal-wide">
+        <div class="modal-header">
+          <h2>常错词汇 Top 100</h2>
+          <button id="close-mistakes-btn" type="button" class="icon-close" aria-label="关闭">×</button>
+        </div>
+        <div class="mistakes-head">
+          <span>发音</span>
+          <span>单词</span>
+          <span>解释</span>
+          <span>错误次数</span>
+        </div>
+        <div id="mistakes-list" class="mistakes-list"></div>
+      </div>
+    </div>
+
+    <template id="card-template">
+      <button type="button" class="word-card">
+        <span class="word-text"></span>
+      </button>
+    </template>
+
+    <div class="version-badge">1.0.0版</div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
