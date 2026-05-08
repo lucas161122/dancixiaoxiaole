@@ -3,6 +3,85 @@ const STORAGE_KEYS = {
   pairs: "typing-match-pairs",
   mistakes: "typing-match-mistakes",
   speech: "typing-match-speech-settings",
+  wordbookLabel: "typing-match-wordbook-label",
+};
+
+const BUILTIN_WORDBOOKS = {
+  grade2: {
+    name: "二年级默认词表",
+    pairs: [
+      ["class", "班级"], ["school", "学校"], ["teacher", "老师"], ["student", "学生"],
+      ["friend", "朋友"], ["morning", "早上"], ["afternoon", "下午"], ["evening", "傍晚"],
+      ["hello", "你好"], ["goodbye", "再见"], ["please", "请"], ["sorry", "对不起"],
+      ["thank you", "谢谢你"], ["book", "书"], ["pen", "钢笔"], ["pencil", "铅笔"],
+      ["bag", "书包"], ["desk", "书桌"], ["chair", "椅子"], ["window", "窗户"],
+      ["door", "门"], ["blackboard", "黑板"], ["apple", "苹果"], ["banana", "香蕉"],
+      ["orange", "橙子"], ["milk", "牛奶"], ["water", "水"], ["bread", "面包"],
+      ["egg", "鸡蛋"], ["cat", "猫"], ["dog", "狗"], ["bird", "鸟"],
+      ["fish", "鱼"], ["rabbit", "兔子"], ["sun", "太阳"], ["rain", "雨"],
+      ["tree", "树"], ["flower", "花"], ["happy", "高兴的"], ["small", "小的"],
+    ],
+  },
+  grade3: {
+    name: "三年级默认词表",
+    pairs: [
+      ["classroom", "教室"], ["library", "图书馆"], ["playground", "操场"], ["computer", "电脑"],
+      ["homework", "家庭作业"], ["picture", "图片"], ["question", "问题"], ["answer", "答案"],
+      ["family", "家庭"], ["father", "爸爸"], ["mother", "妈妈"], ["brother", "兄弟"],
+      ["sister", "姐妹"], ["grandpa", "爷爷；外公"], ["grandma", "奶奶；外婆"], ["breakfast", "早餐"],
+      ["lunch", "午餐"], ["dinner", "晚餐"], ["banana", "香蕉"], ["watermelon", "西瓜"],
+      ["strawberry", "草莓"], ["chicken", "鸡肉；鸡"], ["vegetable", "蔬菜"], ["juice", "果汁"],
+      ["elephant", "大象"], ["monkey", "猴子"], ["horse", "马"], ["panda", "熊猫"],
+      ["cloudy", "多云的"], ["sunny", "晴朗的"], ["rainy", "下雨的"], ["windy", "有风的"],
+      ["river", "河流"], ["mountain", "山"], ["between", "在……之间"], ["behind", "在……后面"],
+      ["beside", "在……旁边"], ["beautiful", "美丽的"], ["strong", "强壮的"], ["hungry", "饥饿的"],
+    ],
+  },
+  grade4: {
+    name: "四年级默认词表",
+    pairs: [
+      ["subject", "学科"], ["English", "英语"], ["Chinese", "语文"], ["math", "数学"],
+      ["science", "科学"], ["music", "音乐"], ["art", "美术"], ["history", "历史"],
+      ["Monday", "星期一"], ["Tuesday", "星期二"], ["Wednesday", "星期三"], ["Thursday", "星期四"],
+      ["Friday", "星期五"], ["Saturday", "星期六"], ["Sunday", "星期日"], ["January", "一月"],
+      ["February", "二月"], ["March", "三月"], ["April", "四月"], ["May", "五月"],
+      ["usually", "通常"], ["sometimes", "有时"], ["always", "总是"], ["never", "从不"],
+      ["before", "在……之前"], ["after", "在……之后"], ["because", "因为"], ["important", "重要的"],
+      ["favourite", "最喜欢的"], ["interesting", "有趣的"], ["difficult", "困难的"], ["healthy", "健康的"],
+      ["exercise", "锻炼"], ["festival", "节日"], ["travel", "旅行"], ["village", "村庄"],
+      ["museum", "博物馆"], ["hospital", "医院"], ["station", "车站"], ["market", "市场"],
+    ],
+  },
+  grade5: {
+    name: "五年级默认词表",
+    pairs: [
+      ["arrive", "到达"], ["leave", "离开"], ["borrow", "借入"], ["return", "归还"],
+      ["remember", "记得"], ["forget", "忘记"], ["choose", "选择"], ["collect", "收集"],
+      ["protect", "保护"], ["change", "改变"], ["carry", "搬；携带"], ["build", "建造"],
+      ["country", "国家"], ["capital", "首都"], ["language", "语言"], ["future", "未来"],
+      ["weather", "天气"], ["temperature", "温度"], ["spring", "春天"], ["summer", "夏天"],
+      ["autumn", "秋天"], ["winter", "冬天"], ["careful", "认真的；小心的"], ["friendly", "友好的"],
+      ["quiet", "安静的"], ["clever", "聪明的"], ["excited", "兴奋的"], ["worried", "担心的"],
+      ["early", "早地；早的"], ["late", "迟的；晚地"], ["around", "在周围"], ["across", "穿过"],
+      ["through", "穿过"], ["without", "没有"], ["another", "另一个"], ["together", "一起"],
+      ["message", "信息"], ["holiday", "假期"], ["project", "项目"], ["environment", "环境"],
+    ],
+  },
+  grade6: {
+    name: "六年级默认词表",
+    pairs: [
+      ["decide", "决定"], ["discuss", "讨论"], ["improve", "提高"], ["manage", "设法做到"],
+      ["prepare", "准备"], ["realize", "意识到"], ["receive", "收到"], ["reply", "回复"],
+      ["search", "搜索"], ["share", "分享"], ["solve", "解决"], ["suggest", "建议"],
+      ["tradition", "传统"], ["culture", "文化"], ["information", "信息"], ["example", "例子"],
+      ["experience", "经历；经验"], ["activity", "活动"], ["advice", "建议"], ["opinion", "看法"],
+      ["difference", "不同"], ["meaning", "意思"], ["possible", "可能的"], ["special", "特别的"],
+      ["necessary", "必要的"], ["dangerous", "危险的"], ["successful", "成功的"], ["surprised", "惊讶的"],
+      ["although", "虽然"], ["however", "然而"], ["already", "已经"], ["instead", "代替；反而"],
+      ["finally", "最后"], ["during", "在……期间"], ["towards", "朝向"], ["ordinary", "普通的"],
+      ["ancient", "古代的"], ["modern", "现代的"], ["local", "当地的"], ["international", "国际的"],
+    ],
+  },
 };
 
 const COLORS = [
@@ -28,6 +107,7 @@ const state = {
   mistakes: {},
   speechMode: "click",
   speechRate: 1,
+  wordbookLabel: "",
 };
 
 const PAIR_LIMITS = {
@@ -41,6 +121,7 @@ const els = {
   pairCount: document.querySelector("#pair-count"),
   importBtn: document.querySelector("#import-btn"),
   fileInput: document.querySelector("#file-input"),
+  defaultWordbookBtn: document.querySelector("#default-wordbook-btn"),
   startBtn: document.querySelector("#start-btn"),
   speechMode: document.querySelector("#speech-mode"),
   speechRate: document.querySelector("#speech-rate"),
@@ -55,6 +136,7 @@ const els = {
   mistakesModal: document.querySelector("#mistakes-modal"),
   mistakesList: document.querySelector("#mistakes-list"),
   closeMistakesBtn: document.querySelector("#close-mistakes-btn"),
+  wordbookModal: document.querySelector("#wordbook-modal"),
   cardTemplate: document.querySelector("#card-template"),
 };
 
@@ -70,6 +152,7 @@ function initialize() {
   restoreMistakes();
   restoreSpeechSettings();
   bindEvents();
+  ensureBuiltinPairsAvailable();
   updatePairLabel();
   updateWordbookStatus();
   renderBoard();
@@ -101,6 +184,7 @@ function bindEvents() {
 
   els.importBtn.addEventListener("click", openFilePicker);
   els.fileInput.addEventListener("change", handleFileImport);
+  els.defaultWordbookBtn.addEventListener("click", openWordbookModal);
   els.startBtn.addEventListener("click", startOrResetGame);
   els.continueBtn.addEventListener("click", continueChallenge);
   els.finishBtn.addEventListener("click", finishChallenge);
@@ -115,6 +199,14 @@ function bindEvents() {
     if (event.target === els.mistakesModal) {
       closeMistakesModal();
     }
+  });
+  els.wordbookModal.addEventListener("click", (event) => {
+    if (event.target === els.wordbookModal) {
+      hideModal(els.wordbookModal);
+    }
+  });
+  document.querySelectorAll(".wordbook-option").forEach((button) => {
+    button.addEventListener("click", () => useBuiltinWordbook(button.dataset.book));
   });
 
   els.speechMode.addEventListener("change", () => {
@@ -165,6 +257,7 @@ function restoreTitle() {
 function restorePairs() {
   try {
     const savedPairs = JSON.parse(localStorage.getItem(STORAGE_KEYS.pairs) || "[]");
+    state.wordbookLabel = localStorage.getItem(STORAGE_KEYS.wordbookLabel) || "";
     if (Array.isArray(savedPairs)) {
       state.allPairs = normalizePairs(savedPairs);
       shuffleArray(state.allPairs);
@@ -207,12 +300,41 @@ function persistSpeechSettings() {
   );
 }
 
-function updateWordbookStatus() {
+function updateWordbookStatus(label = state.wordbookLabel) {
+  state.wordbookLabel = label || "";
   if (!state.allPairs.length) {
     els.wordbookText.textContent = "尚未导入词表";
     return;
   }
-  els.wordbookText.textContent = `已加载 ${state.allPairs.length} 对词汇`;
+  const prefix = state.wordbookLabel ? `${state.wordbookLabel}：` : "";
+  els.wordbookText.textContent = `${prefix}已加载 ${state.allPairs.length} 对词汇`;
+}
+
+function ensureBuiltinPairsAvailable() {
+  if (state.allPairs.length) {
+    return;
+  }
+  loadBuiltinWordbook("grade2", false);
+}
+
+function openWordbookModal() {
+  showModal(els.wordbookModal);
+}
+
+function useBuiltinWordbook(bookKey) {
+  loadBuiltinWordbook(bookKey, true);
+  hideModal(els.wordbookModal);
+}
+
+function loadBuiltinWordbook(bookKey, shouldPersist) {
+  const wordbook = BUILTIN_WORDBOOKS[bookKey];
+  if (!wordbook) {
+    return;
+  }
+  loadWordbook(wordbook.pairs, shouldPersist, wordbook.name);
+  if (shouldPersist) {
+    alert(`已加载${wordbook.name}，共 ${state.allPairs.length} 对词汇。`);
+  }
 }
 
 function openFilePicker() {
@@ -231,24 +353,11 @@ async function handleFileImport(event) {
 
   try {
     const pairs = await parseWordFile(file);
-    const normalized = normalizePairs(pairs);
-    if (!normalized.length) {
+    if (!normalizePairs(pairs).length) {
       alert("词表中未找到有效的前两列数据。");
       return;
     }
-
-    state.allPairs = shuffleArray(normalized.slice());
-    state.roundOffset = 0;
-    state.gameStarted = false;
-    state.matchedCount = 0;
-    state.firstSelection = null;
-    stopTimer();
-    state.timer = 0;
-    resetTimerText();
-    prepareRoundFromCurrentOffset();
-    renderBoard();
-    updateWordbookStatus();
-    persistPairs();
+    loadWordbook(pairs, true);
     els.startBtn.textContent = "开始游戏";
     alert(`导入成功，共载入 ${state.allPairs.length} 对词汇。`);
   } catch (error) {
@@ -261,6 +370,25 @@ async function handleFileImport(event) {
 
 function persistPairs() {
   localStorage.setItem(STORAGE_KEYS.pairs, JSON.stringify(state.allPairs));
+  localStorage.setItem(STORAGE_KEYS.wordbookLabel, state.wordbookLabel || "");
+}
+
+function loadWordbook(pairs, shouldPersist, label) {
+  const normalized = normalizePairs(pairs);
+  state.allPairs = shuffleArray(normalized.slice());
+  state.roundOffset = 0;
+  state.gameStarted = false;
+  state.matchedCount = 0;
+  state.firstSelection = null;
+  stopTimer();
+  state.timer = 0;
+  resetTimerText();
+  prepareRoundFromCurrentOffset();
+  renderBoard();
+  updateWordbookStatus(label);
+  if (shouldPersist) {
+    persistPairs();
+  }
 }
 
 function normalizePairs(rawPairs) {

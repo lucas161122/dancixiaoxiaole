@@ -327,6 +327,17 @@ select {
   margin-top: 20px;
 }
 
+.wordbook-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.wordbook-option:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .modal-header,
 .mistakes-head,
 .mistake-row {
@@ -408,6 +419,32 @@ select {
   background: rgba(255, 255, 255, 0.72);
   box-shadow: 0 10px 24px rgba(173, 106, 143, 0.16);
   backdrop-filter: blur(10px);
+}
+
+.default-wordbook-btn {
+  position: fixed;
+  left: 16px;
+  bottom: 14px;
+  z-index: 12;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff9e73, #ff7b9c);
+  box-shadow: 0 12px 26px rgba(221, 113, 134, 0.22);
+  backdrop-filter: blur(10px);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.default-wordbook-btn:hover {
+  transform: translateY(-2px);
+}
+
+.default-wordbook-btn:active {
+  transform: translateY(0);
 }
 
 @keyframes vanish {
@@ -493,6 +530,10 @@ select {
 
   .result-actions {
     flex-direction: column;
+  }
+
+  .wordbook-actions {
+    grid-template-columns: 1fr;
   }
 
   .mistakes-head span:nth-child(3),

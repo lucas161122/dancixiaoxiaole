@@ -98,12 +98,26 @@
       </div>
     </div>
 
+    <div id="wordbook-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-card">
+        <h2>选择默认词表</h2>
+        <div class="wordbook-actions">
+          <button type="button" class="action-btn wordbook-option" data-book="grade2">二年级</button>
+          <button type="button" class="action-btn wordbook-option" data-book="grade3">三年级</button>
+          <button type="button" class="action-btn wordbook-option" data-book="grade4">四年级</button>
+          <button type="button" class="action-btn wordbook-option" data-book="grade5">五年级</button>
+          <button type="button" class="action-btn wordbook-option" data-book="grade6">六年级</button>
+        </div>
+      </div>
+    </div>
+
     <template id="card-template">
       <button type="button" class="word-card">
         <span class="word-text"></span>
       </button>
     </template>
 
+    <button id="default-wordbook-btn" type="button" class="default-wordbook-btn">导入默认词表</button>
     <div class="version-badge">1.0.0版</div>
 
     <script src="./app.js"></script>
