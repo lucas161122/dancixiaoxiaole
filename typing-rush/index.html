@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Rush</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="glow glow-one"></div>
+      <div class="glow glow-two"></div>
+
+      <main class="game-panel">
+        <section id="home-screen" class="screen">
+          <div class="hero hero-home">
+            <p class="eyebrow">Typing Game</p>
+            <h1>Typing Rush</h1>
+            <p class="hero-copy">
+              选择一种玩法开始练习。你可以进入固定课程的关卡模式，也可以进入完全自由的无拘束打字区。
+            </p>
+          </div>
+
+          <section class="mode-grid" aria-label="模式选择">
+            <article class="mode-card">
+              <p class="mode-tag">Level Mode</p>
+              <h2>关卡模式</h2>
+              <p>
+                按课程关卡依次练习 `fj`、`dk`、`sl`、`al` 和空格组合。每关完成后自动解锁下一关。
+              </p>
+              <button id="go-level-btn" class="primary-btn" type="button">进入关卡模式</button>
+            </article>
+
+            <article class="mode-card">
+              <p class="mode-tag">Free Mode</p>
+              <h2>自由模式</h2>
+              <p>
+                完全自由打字，没有目标文本、没有时限、没有判定。你想打什么就打什么，只保留基础输入统计。
+              </p>
+              <button id="go-free-btn" class="ghost-btn" type="button">进入自由模式</button>
+            </article>
+          </section>
+        </section>
+
+        <section id="level-screen" class="screen hidden">
+          <div class="topbar">
+            <button id="back-from-level-btn" class="back-btn" type="button">返回主页</button>
+            <div class="topbar-copy">
+              <p class="eyebrow">Level Mode</p>
+              <h2>关卡模式</h2>
+            </div>
+          </div>
+
+          <section class="level-layout">
+            <aside class="level-sidebar">
+              <div class="sidebar-head">
+                <h3>课程关卡</h3>
+                <p>从基础指法到组合练习，逐关推进。</p>
+              </div>
+              <div id="level-list" class="level-list" aria-label="关卡列表"></div>
+            </aside>
+
+            <div class="level-main">
+              <section class="level-overview">
+                <div>
+                  <p class="mode-tag">Current Level</p>
+                  <h3 id="level-title">fj指法</h3>
+                  <p id="level-desc" class="hero-copy"></p>
+                </div>
+                <div class="level-actions">
+                  <button id="restart-btn" class="ghost-btn" type="button">重练本关</button>
+                  <button id="next-level-btn" class="primary-btn" type="button">下一关</button>
+                </div>
+              </section>
+
+              <section class="stats-grid level-stats" aria-label="关卡数据">
+                <article class="stat-card">
+                  <span class="stat-label">当前关卡</span>
+                  <strong id="current-level-value" class="stat-value">1 / 9</strong>
+                </article>
+                <article class="stat-card">
+                  <span class="stat-label">完成行数</span>
+                  <strong id="lines-value" class="stat-value">0</strong>
+                </article>
+                <article class="stat-card">
+                  <span class="stat-label">正确率</span>
+                  <strong id="accuracy-value" class="stat-value">100%</strong>
+                </article>
+                <article class="stat-card">
+                  <span class="stat-label">WPM</span>
+                  <strong id="wpm-value" class="stat-value">0</strong>
+                </article>
+              </section>
+
+              <section class="typing-stage" aria-label="关卡打字区域">
+                <div class="stage-head">
+                  <h3>照着目标输入</h3>
+                  <p id="status-text">点击输入框后开始练习，完成当前行会自动切换。</p>
+                </div>
+
+                <div id="quote-display" class="quote-display" aria-live="polite"></div>
+
+                <label class="input-shell" for="typing-input">
+                  <span class="input-label">输入区</span>
+                  <textarea
+                    id="typing-input"
+                    rows="4"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    placeholder="按目标内容输入..."
+                  ></textarea>
+                </label>
+              </section>
+
+              <section class="tips-strip" aria-label="提示">
+                <div>当前关卡只练指定键位，适合建立肌肉记忆。</div>
+                <div>每完成一行会自动切到下一行。</div>
+                <div>通关后可以点“下一关”继续往后练。</div>
+              </section>
+            </div>
+          </section>
+        </section>
+
+        <section id="free-screen" class="screen hidden">
+          <div class="topbar">
+            <button id="back-from-free-btn" class="back-btn" type="button">返回主页</button>
+            <div class="topbar-copy">
+              <p class="eyebrow">Free Mode</p>
+              <h2>自由模式</h2>
+            </div>
+          </div>
+
+          <section class="free-hero">
+            <p class="hero-copy">
+              这里没有目标句子、没有倒计时、没有对错限制。你可以写单词、句子、日记、代码，或者只是随便敲键盘找手感。
+            </p>
+          </section>
+
+          <section class="stats-grid free-stats" aria-label="自由模式数据">
+            <article class="stat-card">
+              <span class="stat-label">已输入字符</span>
+              <strong id="free-chars-value" class="stat-value">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">输入时长</span>
+              <strong id="free-time-value" class="stat-value">0s</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">估算 WPM</span>
+              <strong id="free-wpm-value" class="stat-value">0</strong>
+            </article>
+          </section>
+
+          <section class="typing-stage free-stage" aria-label="自由打字区域">
+            <div class="stage-head">
+              <h3>自由输入</h3>
+              <p id="free-status-text">点击输入框后就可以随意打字，不会被打断。</p>
+            </div>
+
+            <label class="input-shell" for="free-typing-input">
+              <span class="input-label">无限输入区</span>
+              <textarea
+                id="free-typing-input"
+                rows="12"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off"
+                placeholder="这里完全自由，没有任何限制..."
+              ></textarea>
+            </label>
+
+            <div class="free-actions">
+              <button id="clear-free-btn" class="ghost-btn" type="button">清空内容</button>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div id="result-modal" class="result-modal hidden" aria-hidden="true">
+      <div class="result-card">
+        <p class="eyebrow">Level Clear</p>
+        <h2>这一关完成了</h2>
+        <p id="result-summary" class="result-summary"></p>
+        <div class="result-actions">
+          <button id="play-again-btn" class="ghost-btn" type="button">重练本关</button>
+          <button id="modal-next-level-btn" class="primary-btn" type="button">进入下一关</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
